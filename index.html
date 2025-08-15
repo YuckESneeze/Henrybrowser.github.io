@@ -337,6 +337,57 @@
       background: var(--accent-hover);
     }
     
+    /* Proxy Selection */
+    .proxy-selector {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      margin-top: 1rem;
+    }
+    
+    .proxy-selector h3 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    
+    .proxy-options {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    
+    .proxy-option {
+      flex: 1;
+      min-width: 120px;
+      background: var(--input-bg);
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .proxy-option:hover {
+      background: var(--border);
+    }
+    
+    .proxy-option.active {
+      background: var(--accent);
+      color: var(--secondary-bg);
+      font-weight: bold;
+    }
+    
+    .proxy-option-name {
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+    
+    .proxy-option-status {
+      font-size: 0.8rem;
+    }
+    
     /* Footer */
     footer {
       background: var(--secondary-bg);
@@ -352,6 +403,12 @@
       max-width: 800px;
       margin: 0 auto;
       line-height: 1.8;
+    }
+    
+    .access-note {
+      margin-top: 1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
     }
     
     /* Responsive Design */
@@ -392,6 +449,10 @@
       .search-btn {
         padding: 0.9rem;
       }
+      
+      .proxy-options {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
@@ -408,37 +469,37 @@
         <h2>Academic Resources</h2>
         <ul>
           <li>
-            <a href="https://www.wikipedia.org" target="viewerFrame">
+            <a href="#" data-url="https://www.wikipedia.org">
               Wikipedia Encyclopedia
               <span class="resource-type">Comprehensive knowledge base</span>
             </a>
           </li>
           <li>
-            <a href="https://scratch.mit.edu" target="viewerFrame">
+            <a href="#" data-url="https://scratch.mit.edu">
               MIT Creative Coding
               <span class="resource-type">Programming learning platform</span>
             </a>
           </li>
           <li>
-            <a href="https://www.youtube.com" target="viewerFrame">
+            <a href="#" data-url="https://www.youtube.com">
               Educational Videos
               <span class="resource-type">Instructional media repository</span>
             </a>
           </li>
           <li>
-            <a href="https://www.khanacademy.org" target="viewerFrame">
+            <a href="#" data-url="https://www.khanacademy.org">
               Khan Academy
               <span class="resource-type">STEM learning resources</span>
             </a>
           </li>
           <li>
-            <a href="https://www.nationalgeographic.com" target="viewerFrame">
+            <a href="#" data-url="https://www.nationalgeographic.com">
               National Geographic
               <span class="resource-type">Scientific exploration</span>
             </a>
           </li>
           <li>
-            <a href="https://scholar.google.com" target="viewerFrame">
+            <a href="#" data-url="https://scholar.google.com">
               Google Scholar
               <span class="resource-type">Academic research papers</span>
             </a>
@@ -485,13 +546,7 @@
             </div>
           </div>
         </div>
-        <iframe 
-          name="viewerFrame" 
-          id="viewerFrame" 
-          title="Academic Content Viewer" 
-          sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
-          srcdoc="<html><body style='background:#1a1d35; color:#9aa0b3; display:flex; justify-content:center; align-items:center; flex-direction:column; font-family:Arial; gap:1rem;'><h2 style='text-align:center; font-size:2rem;'>Henry's Research Portal</h2><p>Select a resource or enter a URL to begin your academic research</p><p style='font-size:0.9rem; margin-top:2rem;'>This portal is designed for educational purposes</p></body></html>">
-        </iframe>
+        <iframe name="viewerFrame" id="viewerFrame" title="Academic Content Viewer" sandbox="allow-same-origin allow-scripts allow-forms allow-popups"></iframe>
       </div>
       
       <div class="search-section">
@@ -501,12 +556,30 @@
           <button type="submit" class="search-btn">Search</button>
         </form>
       </div>
+      
+      <div class="proxy-selector">
+        <h3>Research Access Method</h3>
+        <div class="proxy-options">
+          <div class="proxy-option active" data-proxy="direct">
+            <div class="proxy-option-name">Direct Access</div>
+            <div class="proxy-option-status">Recommended</div>
+          </div>
+          <div class="proxy-option" data-proxy="cors">
+            <div class="proxy-option-name">CORS Proxy</div>
+            <div class="proxy-option-status">Alternative</div>
+          </div>
+          <div class="proxy-option" data-proxy="google">
+            <div class="proxy-option-name">Google Translate</div>
+            <div class="proxy-option-status">Fallback</div>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
   
   <footer>
     <p>Henry's Academic Principle: "Knowledge grows when shared. Research responsibly and respect institutional guidelines."</p>
-    <p class="muted">Search anything in the research viewer above to access educational resources</p>
+    <p class="access-note">Search anything in the research viewer above to access educational resources</p>
   </footer>
 
   <script>
@@ -520,6 +593,14 @@
       const reloadBtn = document.getElementById('reloadBtn');
       const searchForm = document.getElementById('searchForm');
       const searchQuery = document.getElementById('searchQuery');
+      const quickLinks = document.querySelectorAll('.quick-links a');
+      const proxyOptions = document.querySelectorAll('.proxy-option');
+      
+      let currentProxy = 'direct';
+      let currentSource = '';
+      
+      // Initialize with a safe page
+      loadSite('https://www.google.com');
       
       // Form submission to load URL
       urlForm.addEventListener('submit', function(e) {
@@ -531,8 +612,30 @@
       searchForm.addEventListener('submit', function(e) {
         e.preventDefault();
         const query = encodeURIComponent(searchQuery.value);
-        const searchUrl = `https://www.google.com/search?q=${query}`;
-        loadSite(searchUrl);
+        loadSite(`https://www.google.com/search?q=${query}`);
+      });
+      
+      // Quick links handling
+      quickLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const url = this.getAttribute('data-url');
+          loadSite(url);
+        });
+      });
+      
+      // Proxy selection
+      proxyOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          proxyOptions.forEach(opt => opt.classList.remove('active'));
+          this.classList.add('active');
+          currentProxy = this.getAttribute('data-proxy');
+          
+          // Reload current site with new proxy
+          if (currentSource) {
+            loadSite(currentSource);
+          }
+        });
       });
       
       // Navigation controls
@@ -568,8 +671,21 @@
           return;
         }
         
+        currentSource = url;
+        
+        let finalUrl = url;
+        
+        // Apply proxy if needed
+        if (currentProxy === 'cors') {
+          // Use a CORS proxy
+          finalUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+        } else if (currentProxy === 'google') {
+          // Use Google Translate as a proxy
+          finalUrl = `https://translate.google.com/translate?hl=en&sl=auto&tl=en&u=${encodeURIComponent(url)}`;
+        }
+        
         // Update iframe
-        viewerFrame.src = url;
+        viewerFrame.src = finalUrl;
         
         // Update URL display
         currentUrl.textContent = url;
@@ -587,9 +703,6 @@
           currentUrl.textContent = 'research-portal/secure-content';
         }
       });
-      
-      // Load a default site
-      loadSite('https://www.google.com');
     });
   </script>
 </body>
