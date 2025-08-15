@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Henry’s Browser</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="app">
+
+    <!-- PIN Gate -->
+    <div class="gate" id="gate">
+      <div class="card">
+        <h1>Henry’s Browser</h1>
+        <p class="muted">Enter PIN (ask Henry in person)</p>
+        <form id="pinForm">
+          <input class="input" id="pin" type="password" placeholder="PIN" required />
+          <button class="btn" type="submit">Enter</button>
+        </form>
+        <div id="pinErr" class="err" hidden>Wrong PIN.</div>
+      </div>
+    </div>
+
+    <!-- Top bar -->
+    <header class="topbar">
+      <div class="brand">Henry’s Browser</div>
+      <span id="tierPill" class="pill">TIER</span>
+      <input id="addr" class="input" placeholder="https://www.wikipedia.org" />
+      <button id="go" class="btn">Go</button>
+      <button id="logout" class="btn secondary">Logout</button>
+    </header>
+
+    <!-- Body -->
+    <main class="main">
+      <aside class="sidebar">
+        <h3>Quick Links (Basic)</h3>
+        <p class="tip">Basic can only open these three:</p>
+        <a class="link" data-url="https://www.wikipedia.org">Wikipedia</a>
+        <a class="link" data-url="https://scratch.mit.edu">Scratch</a>
+        <a class="link" data-url="https://www.youtube.com">YouTube</a>
+
+        <div class="hr"></div>
+        <h3>Notes</h3>
+        <p class="tip">Some sites refuse to load in an embedded window. If it’s blank, that’s their rule.</p>
+
+        <div class="footer">
+          <div class="quip" id="quip"></div>
+        </div>
+      </aside>
+
+      <section class="viewport">
+        <iframe id="frame" title="Viewer" sandbox="allow-same-origin allow-scripts allow-forms allow-popups"></iframe>
+        <div id="status" class="status" hidden></div>
+      </section>
+    </main>
+
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
