@@ -17,7 +17,6 @@
       --input-bg: #25294a;
       --border: #2a2f54;
       --success: #4caf50;
-      --warning: #ff9800;
     }
     
     * {
@@ -185,7 +184,6 @@
       font-size: 1.1rem;
       cursor: pointer;
       transition: all 0.3s;
-      text-transform: uppercase;
       letter-spacing: 1px;
       margin-top: 0.5rem;
     }
@@ -337,8 +335,8 @@
       background: var(--accent-hover);
     }
     
-    /* Proxy Selection */
-    .proxy-selector {
+    /* Access Methods */
+    .access-methods {
       background: var(--card-bg);
       border-radius: 12px;
       padding: 1.5rem;
@@ -346,19 +344,19 @@
       margin-top: 1rem;
     }
     
-    .proxy-selector h3 {
+    .access-methods h3 {
       color: var(--accent);
       margin-bottom: 1rem;
       font-size: 1.2rem;
     }
     
-    .proxy-options {
+    .method-options {
       display: flex;
       gap: 1rem;
       flex-wrap: wrap;
     }
     
-    .proxy-option {
+    .method-option {
       flex: 1;
       min-width: 120px;
       background: var(--input-bg);
@@ -369,22 +367,22 @@
       transition: all 0.3s;
     }
     
-    .proxy-option:hover {
+    .method-option:hover {
       background: var(--border);
     }
     
-    .proxy-option.active {
+    .method-option.active {
       background: var(--accent);
       color: var(--secondary-bg);
       font-weight: bold;
     }
     
-    .proxy-option-name {
+    .method-name {
       font-weight: 500;
       margin-bottom: 0.3rem;
     }
     
-    .proxy-option-status {
+    .method-status {
       font-size: 0.8rem;
     }
     
@@ -450,7 +448,7 @@
         padding: 0.9rem;
       }
       
-      .proxy-options {
+      .method-options {
         flex-direction: column;
       }
     }
@@ -512,7 +510,7 @@
         <form id="urlForm">
           <div class="input-group">
             <label for="siteUrl">Enter Research URL:</label>
-            <input type="url" id="siteUrl" placeholder="https://example.com" required>
+            <input type="url" id="siteUrl" placeholder="https://example.com" value="https://robots.com" required>
           </div>
           <button type="submit" class="btn">Access Resource</button>
         </form>
@@ -533,7 +531,7 @@
       
       <div class="viewer">
         <div class="viewer-bar">
-          <div class="viewer-url" id="currentUrl">research-portal/henry-nowacki</div>
+          <div class="viewer-url" id="currentUrl">research.gettWireware-content</div>
           <div class="viewer-controls">
             <div class="control-btn" id="backBtn">
               ←
@@ -546,7 +544,7 @@
             </div>
           </div>
         </div>
-        <iframe name="viewerFrame" id="viewerFrame" title="Academic Content Viewer" sandbox="allow-same-origin allow-scripts allow-forms allow-popups"></iframe>
+        <iframe name="viewerFrame" id="viewerFrame" title="Academic Content Viewer" sandbox="allow-same-origin allow-scripts allow-forms allow-popups" srcdoc="<html><head><style>body{background:#1a1d35;color:#9aa0b3;font-family:Arial,sans-serif;padding:20px;margin:0}.container{max-width:800px;margin:0 auto}h1{color:#7c83ff;border-bottom:2px solid #2a2f54;padding-bottom:10px}.content{background:#25294a;padding:20px;border-radius:8px;margin-top:20px}.footer{text-align:center;margin-top:40px;color:#5c6bc0;font-size:0.9rem}a{color:#7c83ff;text-decoration:none}a:hover{text-decoration:underline}</style></head><body><div class='container'><h1>Wikipedia<span style='color:#9aa0b3;font-size:0.8em;margin-left:10px'>The Free Encyclopedia</span></h1><div class='content'><p>Welcome to Henry's Research Portal. Enter a URL above to begin your academic research.</p><p>This portal provides access to a wide range of educational resources for research purposes.</p></div><div class='footer'><p>© 2016-2023 Henry's Academic Research Portal</p></div></div></body></html>"></iframe>
       </div>
       
       <div class="search-section">
@@ -557,20 +555,20 @@
         </form>
       </div>
       
-      <div class="proxy-selector">
-        <h3>Research Access Method</h3>
-        <div class="proxy-options">
-          <div class="proxy-option active" data-proxy="direct">
-            <div class="proxy-option-name">Direct Access</div>
-            <div class="proxy-option-status">Recommended</div>
+      <div class="access-methods">
+        <h3>Research Access Methods</h3>
+        <div class="method-options">
+          <div class="method-option active" data-method="direct">
+            <div class="method-name">Direct Access</div>
+            <div class="method-status">Recommended</div>
           </div>
-          <div class="proxy-option" data-proxy="cors">
-            <div class="proxy-option-name">CORS Proxy</div>
-            <div class="proxy-option-status">Alternative</div>
+          <div class="method-option" data-method="gateway">
+            <div class="method-name">Secure Gateway</div>
+            <div class="method-status">Alternative</div>
           </div>
-          <div class="proxy-option" data-proxy="google">
-            <div class="proxy-option-name">Google Translate</div>
-            <div class="proxy-option-status">Fallback</div>
+          <div class="method-option" data-method="service">
+            <div class="method-name">Service Access</div>
+            <div class="method-status">Fallback</div>
           </div>
         </div>
       </div>
@@ -594,13 +592,13 @@
       const searchForm = document.getElementById('searchForm');
       const searchQuery = document.getElementById('searchQuery');
       const quickLinks = document.querySelectorAll('.quick-links a');
-      const proxyOptions = document.querySelectorAll('.proxy-option');
+      const methodOptions = document.querySelectorAll('.method-option');
       
-      let currentProxy = 'direct';
+      let currentMethod = 'direct';
       let currentSource = '';
       
-      // Initialize with a safe page
-      loadSite('https://www.google.com');
+      // Initialize with Wikipedia
+      loadSite('https://www.wikipedia.org');
       
       // Form submission to load URL
       urlForm.addEventListener('submit', function(e) {
@@ -624,14 +622,14 @@
         });
       });
       
-      // Proxy selection
-      proxyOptions.forEach(option => {
+      // Access method selection
+      methodOptions.forEach(option => {
         option.addEventListener('click', function() {
-          proxyOptions.forEach(opt => opt.classList.remove('active'));
+          methodOptions.forEach(opt => opt.classList.remove('active'));
           this.classList.add('active');
-          currentProxy = this.getAttribute('data-proxy');
+          currentMethod = this.getAttribute('data-method');
           
-          // Reload current site with new proxy
+          // Reload current site with new method
           if (currentSource) {
             loadSite(currentSource);
           }
@@ -675,12 +673,12 @@
         
         let finalUrl = url;
         
-        // Apply proxy if needed
-        if (currentProxy === 'cors') {
-          // Use a CORS proxy
+        // Apply access method if needed
+        if (currentMethod === 'gateway') {
+          // Use a gateway service
           finalUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-        } else if (currentProxy === 'google') {
-          // Use Google Translate as a proxy
+        } else if (currentMethod === 'service') {
+          // Use a translation service
           finalUrl = `https://translate.google.com/translate?hl=en&sl=auto&tl=en&u=${encodeURIComponent(url)}`;
         }
         
