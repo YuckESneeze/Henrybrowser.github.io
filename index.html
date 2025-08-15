@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Henry's Research Portal</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Henry's Academic Research Portal</title>
   <style>
-    /* Henry's Dark Theme - Enhanced for Academic Appearance */
+    /* Henry's Enhanced Dark Theme */
     :root {
       --primary-bg: #0d0f1a;
       --secondary-bg: #14172a;
       --accent: #7c83ff;
+      --accent-hover: #9196ff;
       --text: #ffffff;
       --muted: #9aa0b3;
       --card-bg: #1a1d35;
+      --input-bg: #25294a;
+      --border: #2a2f54;
       --success: #4caf50;
       --warning: #ff9800;
     }
@@ -98,7 +101,7 @@
       color: var(--accent);
       margin-bottom: 1.2rem;
       padding-bottom: 0.5rem;
-      border-bottom: 1px solid #2a2f54;
+      border-bottom: 1px solid var(--border);
       font-size: 1.5rem;
     }
     
@@ -119,7 +122,7 @@
     .quick-links a {
       display: block;
       padding: 0.8rem;
-      background: #25294a;
+      background: var(--input-bg);
       border-radius: 8px;
       color: var(--accent);
       text-decoration: none;
@@ -128,7 +131,7 @@
     }
     
     .quick-links a:hover {
-      background: #2a2f54;
+      background: var(--border);
       text-decoration: none;
     }
     
@@ -160,8 +163,8 @@
     .input-group input {
       padding: 0.9rem;
       border-radius: 8px;
-      border: 2px solid #2a2f54;
-      background: #25294a;
+      border: 2px solid var(--border);
+      background: var(--input-bg);
       color: var(--text);
       font-size: 1rem;
       transition: border-color 0.3s;
@@ -188,7 +191,7 @@
     }
     
     .btn:hover {
-      background: #9196ff;
+      background: var(--accent-hover);
       transform: translateY(-2px);
       box-shadow: 0 4px 10px rgba(124, 131, 255, 0.3);
     }
@@ -250,7 +253,7 @@
     }
     
     .viewer-bar {
-      background: #25294a;
+      background: var(--input-bg);
       padding: 0.8rem 1.2rem;
       display: flex;
       align-items: center;
@@ -259,7 +262,7 @@
     
     .viewer-url {
       flex: 1;
-      background: #1a1d35;
+      background: var(--card-bg);
       padding: 0.6rem 1rem;
       border-radius: 20px;
       font-size: 0.9rem;
@@ -278,7 +281,7 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: #2a2f54;
+      background: var(--border);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -290,10 +293,48 @@
       background: var(--accent);
     }
     
-    iframe {
+    /* Search Section */
+    .search-section {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+    
+    .search-section h2 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+    
+    .search-form {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .search-input {
       flex: 1;
-      width: 100%;
+      padding: 0.9rem;
+      border-radius: 8px;
+      border: 2px solid var(--border);
+      background: var(--input-bg);
+      color: var(--text);
+      font-size: 1rem;
+    }
+    
+    .search-btn {
+      background: var(--accent);
+      color: var(--secondary-bg);
       border: none;
+      padding: 0 1.5rem;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .search-btn:hover {
+      background: var(--accent-hover);
     }
     
     /* Footer */
@@ -343,6 +384,14 @@
         font-size: 0.8rem;
         padding: 0.4rem 0.8rem;
       }
+      
+      .search-form {
+        flex-direction: column;
+      }
+      
+      .search-btn {
+        padding: 0.9rem;
+      }
     }
   </style>
 </head>
@@ -359,37 +408,37 @@
         <h2>Academic Resources</h2>
         <ul>
           <li>
-            <a href="https://www.wikipedia.org" target="viewer">
+            <a href="https://www.wikipedia.org" target="viewerFrame">
               Wikipedia Encyclopedia
               <span class="resource-type">Comprehensive knowledge base</span>
             </a>
           </li>
           <li>
-            <a href="https://scratch.mit.edu" target="viewer">
+            <a href="https://scratch.mit.edu" target="viewerFrame">
               MIT Creative Coding
               <span class="resource-type">Programming learning platform</span>
             </a>
           </li>
           <li>
-            <a href="https://www.youtube.com" target="viewer">
+            <a href="https://www.youtube.com" target="viewerFrame">
               Educational Videos
               <span class="resource-type">Instructional media repository</span>
             </a>
           </li>
           <li>
-            <a href="https://www.khanacademy.org" target="viewer">
+            <a href="https://www.khanacademy.org" target="viewerFrame">
               Khan Academy
               <span class="resource-type">STEM learning resources</span>
             </a>
           </li>
           <li>
-            <a href="https://www.nationalgeographic.com" target="viewer">
+            <a href="https://www.nationalgeographic.com" target="viewerFrame">
               National Geographic
               <span class="resource-type">Scientific exploration</span>
             </a>
           </li>
           <li>
-            <a href="https://scholar.google.com" target="viewer">
+            <a href="https://scholar.google.com" target="viewerFrame">
               Google Scholar
               <span class="resource-type">Academic research papers</span>
             </a>
@@ -399,7 +448,7 @@
       
       <div class="card url-access">
         <h2>Research Access</h2>
-        <form id="urlForm" onsubmit="loadSite(); return false;">
+        <form id="urlForm">
           <div class="input-group">
             <label for="siteUrl">Enter Research URL:</label>
             <input type="url" id="siteUrl" placeholder="https://example.com" required>
@@ -425,65 +474,122 @@
         <div class="viewer-bar">
           <div class="viewer-url" id="currentUrl">research-portal/henry-nowacki</div>
           <div class="viewer-controls">
-            <div class="control-btn" onclick="document.querySelector('iframe').contentWindow.history.back()">
+            <div class="control-btn" id="backBtn">
               ←
             </div>
-            <div class="control-btn" onclick="document.querySelector('iframe').contentWindow.history.forward()">
+            <div class="control-btn" id="forwardBtn">
               →
             </div>
-            <div class="control-btn" onclick="document.querySelector('iframe').contentWindow.location.reload()">
+            <div class="control-btn" id="reloadBtn">
               ↻
             </div>
           </div>
         </div>
-        <iframe name="viewer" title="Academic Content Viewer" srcdoc="<html><body style='background:#1a1d35; color:#9aa0b3; display:flex; justify-content:center; align-items:center; flex-direction:column; font-family:Arial; gap:1rem;'><h2 style='text-align:center; font-size:2rem;'>Henry's Research Portal</h2><p>Select a resource or enter a URL to begin your academic research</p><p style='font-size:0.9rem; margin-top:2rem;'>This portal is designed for educational purposes</p></body></html>"></iframe>
+        <iframe 
+          name="viewerFrame" 
+          id="viewerFrame" 
+          title="Academic Content Viewer" 
+          sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+          srcdoc="<html><body style='background:#1a1d35; color:#9aa0b3; display:flex; justify-content:center; align-items:center; flex-direction:column; font-family:Arial; gap:1rem;'><h2 style='text-align:center; font-size:2rem;'>Henry's Research Portal</h2><p>Select a resource or enter a URL to begin your academic research</p><p style='font-size:0.9rem; margin-top:2rem;'>This portal is designed for educational purposes</p></body></html>">
+        </iframe>
+      </div>
+      
+      <div class="search-section">
+        <h2>Academic Search</h2>
+        <form id="searchForm" class="search-form">
+          <input type="text" id="searchQuery" placeholder="Search for any academic topic..." class="search-input" required>
+          <button type="submit" class="search-btn">Search</button>
+        </form>
       </div>
     </section>
   </main>
   
   <footer>
     <p>Henry's Academic Principle: "Knowledge grows when shared. Research responsibly and respect institutional guidelines."</p>
+    <p class="muted">Search anything in the research viewer above to access educational resources</p>
   </footer>
 
   <script>
-    function loadSite() {
-      event.preventDefault();
-      const urlInput = document.getElementById('siteUrl').value;
-      const iframe = document.querySelector('iframe');
-      const urlDisplay = document.getElementById('currentUrl');
+    document.addEventListener('DOMContentLoaded', function() {
+      const urlForm = document.getElementById('urlForm');
+      const siteUrl = document.getElementById('siteUrl');
+      const viewerFrame = document.getElementById('viewerFrame');
+      const currentUrl = document.getElementById('currentUrl');
+      const backBtn = document.getElementById('backBtn');
+      const forwardBtn = document.getElementById('forwardBtn');
+      const reloadBtn = document.getElementById('reloadBtn');
+      const searchForm = document.getElementById('searchForm');
+      const searchQuery = document.getElementById('searchQuery');
       
-      // Validate URL format
-      if (!urlInput.match(/^https?:\/\//i)) {
-        alert('Please enter a valid URL starting with http:// or https://');
-        return;
+      // Form submission to load URL
+      urlForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        loadSite(siteUrl.value);
+      });
+      
+      // Search form submission
+      searchForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const query = encodeURIComponent(searchQuery.value);
+        const searchUrl = `https://www.google.com/search?q=${query}`;
+        loadSite(searchUrl);
+      });
+      
+      // Navigation controls
+      backBtn.addEventListener('click', function() {
+        try {
+          viewerFrame.contentWindow.history.back();
+        } catch (e) {
+          console.log('Navigation error:', e.message);
+        }
+      });
+      
+      forwardBtn.addEventListener('click', function() {
+        try {
+          viewerFrame.contentWindow.history.forward();
+        } catch (e) {
+          console.log('Navigation error:', e.message);
+        }
+      });
+      
+      reloadBtn.addEventListener('click', function() {
+        try {
+          viewerFrame.contentWindow.location.reload();
+        } catch (e) {
+          console.log('Reload error:', e.message);
+        }
+      });
+      
+      // Function to load a site
+      function loadSite(url) {
+        // Validate URL format
+        if (!url.match(/^https?:\/\//i)) {
+          alert('Please enter a valid URL starting with http:// or https://');
+          return;
+        }
+        
+        // Update iframe
+        viewerFrame.src = url;
+        
+        // Update URL display
+        currentUrl.textContent = url;
+        
+        // Add educational note to console
+        console.log('Henry\'s Research Portal: Loading educational resource -', url);
       }
       
-      // Update iframe
-      iframe.src = urlInput;
+      // Update URL display when iframe location changes
+      viewerFrame.addEventListener('load', function() {
+        try {
+          currentUrl.textContent = viewerFrame.contentWindow.location.href;
+        } catch (e) {
+          // Cross-origin error handling
+          currentUrl.textContent = 'research-portal/secure-content';
+        }
+      });
       
-      // Update URL display
-      urlDisplay.textContent = urlInput;
-      
-      // Add educational note to console for debugging
-      console.log('Henry\'s Research Portal: Loading educational resource -', urlInput);
-    }
-    
-    // Allow Enter key to submit form
-    document.getElementById('siteUrl').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        loadSite();
-      }
-    });
-    
-    // Update URL display when iframe location changes
-    const iframe = document.querySelector('iframe');
-    iframe.addEventListener('load', function() {
-      try {
-        document.getElementById('currentUrl').textContent = iframe.contentWindow.location.href;
-      } catch (e) {
-        // Cross-origin error handling
-        document.getElementById('currentUrl').textContent = 'research-portal/secure-content';
-      }
+      // Load a default site
+      loadSite('https://www.google.com');
     });
   </script>
 </body>
