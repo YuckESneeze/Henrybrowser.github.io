@@ -5,7 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Henry's Academic Research Portal</title>
   <style>
-    /* Henry's Enhanced Dark Theme */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
     :root {
       --primary-bg: #0d0f1a;
       --secondary-bg: #14172a;
@@ -17,16 +23,10 @@
       --input-bg: #25294a;
       --border: #2a2f54;
       --success: #4caf50;
-    }
-    
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+      --warning: #ff9800;
     }
     
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: var(--primary-bg);
       color: var(--text);
       line-height: 1.6;
@@ -35,7 +35,6 @@
       flex-direction: column;
     }
     
-    /* Header Styles */
     header {
       background: var(--secondary-bg);
       padding: 1.5rem;
@@ -70,7 +69,6 @@
       font-weight: bold;
     }
     
-    /* Main Content Layout */
     main {
       display: flex;
       flex: 1;
@@ -81,7 +79,6 @@
       width: 100%;
     }
     
-    /* Navigation Section */
     .navigation {
       flex: 0 0 300px;
       display: flex;
@@ -104,7 +101,6 @@
       font-size: 1.5rem;
     }
     
-    /* Links Section */
     .quick-links ul {
       list-style: none;
     }
@@ -141,7 +137,6 @@
       margin-top: 0.3rem;
     }
     
-    /* URL Access Section */
     .url-access form {
       display: flex;
       flex-direction: column;
@@ -194,10 +189,6 @@
       box-shadow: 0 4px 10px rgba(124, 131, 255, 0.3);
     }
     
-    .btn:active {
-      transform: translateY(0);
-    }
-    
     .academic-note {
       background: rgba(76, 175, 80, 0.1);
       border-left: 4px solid var(--success);
@@ -207,7 +198,6 @@
       font-size: 0.9rem;
     }
     
-    /* Viewer Section */
     .viewer-container {
       flex: 1;
       display: flex;
@@ -291,7 +281,6 @@
       background: var(--accent);
     }
     
-    /* Search Section */
     .search-section {
       background: var(--card-bg);
       border-radius: 12px;
@@ -335,7 +324,6 @@
       background: var(--accent-hover);
     }
     
-    /* Access Methods */
     .access-methods {
       background: var(--card-bg);
       border-radius: 12px;
@@ -386,7 +374,6 @@
       font-size: 0.8rem;
     }
     
-    /* Footer */
     footer {
       background: var(--secondary-bg);
       padding: 1.5rem;
@@ -409,7 +396,6 @@
       font-size: 0.9rem;
     }
     
-    /* Responsive Design */
     @media (max-width: 900px) {
       main {
         flex-direction: column;
@@ -567,7 +553,7 @@
             <div class="method-status">Alternative</div>
           </div>
           <div class="method-option" data-method="service">
-            <div class="method-name">Service Access</div>
+            <div class="method-name">Translation Service</div>
             <div class="method-status">Fallback</div>
           </div>
         </div>
@@ -670,15 +656,12 @@
         }
         
         currentSource = url;
-        
         let finalUrl = url;
         
         // Apply access method if needed
         if (currentMethod === 'gateway') {
-          // Use a gateway service
-          finalUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+          finalUrl = `https://cors.zimjs.com/?url=${encodeURIComponent(url)}`;
         } else if (currentMethod === 'service') {
-          // Use a translation service
           finalUrl = `https://translate.google.com/translate?hl=en&sl=auto&tl=en&u=${encodeURIComponent(url)}`;
         }
         
@@ -687,9 +670,6 @@
         
         // Update URL display
         currentUrl.textContent = url;
-        
-        // Add educational note to console
-        console.log('Henry\'s Research Portal: Loading educational resource -', url);
       }
       
       // Update URL display when iframe location changes
