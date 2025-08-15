@@ -3,32 +3,125 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Henry’s Browser</title>
-  <link rel="stylesheet" href="style.css"/>
+  <title>Research Hub</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Times New Roman', serif;
+    }
+    body {
+      background: #f0f5ff;
+      color: #1a237e;
+      line-height: 1.6;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    header {
+      text-align: center;
+      padding: 1rem 0;
+      border-bottom: 2px solid #3f51b5;
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 2.2rem;
+      color: #1a237e;
+    }
+    .muted {
+      color: #5c6bc0;
+      font-style: italic;
+      font-size: 1rem;
+    }
+    main {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    section {
+      flex: 1;
+      min-width: 300px;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    h2 {
+      border-bottom: 1px solid #3f51b5;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      color: #303f9f;
+    }
+    ul {
+      list-style-type: none;
+    }
+    li {
+      margin: 1rem 0;
+      padding: 0.5rem;
+      background: #e8eaf6;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+    li:hover {
+      background: #c5cae9;
+    }
+    a {
+      text-decoration: none;
+      color: #1a237e;
+      font-weight: bold;
+      display: block;
+    }
+    .display-container {
+      flex: 2;
+      min-width: 400px;
+    }
+    .content-frame {
+      width: 100%;
+      height: 500px;
+      border: 1px solid #3f51b5;
+      border-radius: 8px;
+      background: #e3f2fd;
+    }
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      padding: 1rem;
+      color: #5c6bc0;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>Henry’s Browser</h1>
-    <p class="muted">by henry nowacki</p>
+    <h1>Educational Research Hub</h1>
+    <p class="muted">Academic Resource Portal</p>
   </header>
 
   <main>
     <section>
-      <h2>Quick Links</h2>
+      <h2>Learning Resources</h2>
       <ul>
-        <li><a href="https://www.wikipedia.org" target="viewer">Wikipedia</a></li>
-        <li><a href="https://scratch.mit.edu" target="viewer">Scratch</a></li>
-        <li><a href="https://www.youtube.com" target="viewer">YouTube</a></li>
+        <li><a href="https://www.wikipedia.org" target="contentFrame">Encyclopedia Britannica</a></li>
+        <li><a href="https://scratch.mit.edu" target="contentFrame">Creative Coding Platform</a></li>
+        <li><a href="https://www.youtube.com" target="contentFrame">Educational Videos</a></li>
       </ul>
     </section>
 
-    <section class="viewer">
-      <iframe name="viewer" title="Viewer"></iframe>
+    <section class="display-container">
+      <h2>Research Viewer</h2>
+      <iframe 
+        name="contentFrame" 
+        class="content-frame" 
+        title="Academic Content Display"
+        sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+        srcdoc="<html><body style='background:#e3f2fd;display:flex;justify-content:center;align-items:center;color:#1a237e;font-family:Arial'><h2>Select a resource to begin research</h2></body></html>">
+      </iframe>
     </section>
   </main>
 
   <footer>
-    <p>Henry: “Wash your hands not your history.”</p>
+    <p>Academic Reminder: "Knowledge grows when shared."</p>
   </footer>
 </body>
 </html>
